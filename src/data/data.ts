@@ -26,3 +26,17 @@ export const dataCardMatrics = {
   }
 }
 
+export const lineChartData = [
+  { month: "January", users: 1012345, activeUsers: 512345 },
+  { month: "February", users: 1149675, activeUsers: 609876 },
+  { month: "March", users: 1256789, activeUsers: 689543 },
+  { month: "April", users: 1389045, activeUsers: 725678 },
+  { month: "May", users: 1456783, activeUsers: 789012 },
+  { month: "June", users: 1523456, activeUsers: 834567 },
+  { month: "July", users: 1601234, activeUsers: 890123 },
+  { month: "August", users: 1678901, activeUsers: 934567 },
+  { month: "September", users: 1756782, activeUsers: 978901 },
+  { month: "October", users: 1834567, activeUsers: 1023456 },
+  { month: "November", users: 1912345, activeUsers: 1078901 },
+  { month: "December", users: 2003456, activeUsers: 1123456 },
+];
