@@ -1,5 +1,6 @@
 import DataCards from "@/components/DataCards";
-import TotalActiveUsersChart from "@/components/TotalActiveUsers";
+import TotalActiveUsersChart from "@/components/charts/TotalActiveUsers";
+import RevenueDistribution from "@/components/charts/Revenue";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <h1 className="text-4xl font-bold">Streamify Dashboard</h1>
       <DataCards />
       <TotalActiveUsersChart />
+      <RevenueDistribution />
     </div>
   );
 }
