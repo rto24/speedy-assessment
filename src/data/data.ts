@@ -40,3 +40,11 @@ export const lineChartData = [
   { month: "November", users: 1912345, activeUsers: 1078901 },
   { month: "December", users: 2003456, activeUsers: 1123456 },
 ];
+
+export const revenueData = [
+  { source: "Subscriptions", percentage: 63, fill: "#4CAF50" }, 
+  { source: "Ads", percentage: 26, fill: "#2196F3" },           
+  { source: "Partnerships", percentage: 5, fill: "#FFC107" },  
+  { source: "Content Monetization", percentage: 3, fill: "#FF5722" }, 
+  { source: "Merch and Events", percentage: 3, fill: "#9C27B0" },     
+];
