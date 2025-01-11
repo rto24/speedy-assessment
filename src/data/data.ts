@@ -48,3 +48,11 @@ export const revenueData = [
   { source: "Content Monetization", percentage: 3, fill: "#FF5722" }, 
   { source: "Merch and Events", percentage: 3, fill: "#9C27B0" },     
 ];
+
+export const topSongsData = [
+  { song: "Blinding Lights", streams: 2500000000, fill: "#FF4500" }, 
+  { song: "Shape of You", streams: 3200000000, fill: "#FF6347" }, 
+  { song: "Someone You Loved", streams: 2100000000, fill: "#FFA500" }, 
+  { song: "Levitating", streams: 1800000000, fill: "#32CD32" }, 
+  { song: "Bad Guy", streams: 2400000000, fill: "#4682B4" }
+];
