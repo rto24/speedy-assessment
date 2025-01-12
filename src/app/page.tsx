@@ -5,6 +5,7 @@ import DataCards from "@/components/DataCards";
 import TotalActiveUsersChart from "@/components/charts/TotalActiveUsers";
 import RevenueDistribution from "@/components/charts/Revenue";
 import TopSongs from "@/components/charts/TopSongs";
+import DataTable from "@/components/DataTable";
 
 const tabs = [
   { name: "Total Users", component: <TotalActiveUsersChart /> },
@@ -48,6 +49,9 @@ export default function Home() {
         <div className="bg-white shadow rounded-lg p-4">
           {tabs[activeTab].component}
         </div>
+
+        {/* Data Table */}
+        <DataTable />
       </div>
     </div>
   );
