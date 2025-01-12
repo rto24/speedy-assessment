@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils'; 
 import { DataCardProps } from '@/types/dataCard';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 // Interfaces
 export interface CardProps {
@@ -57,13 +58,32 @@ const DataCard: React.FC<DataCardProps> = ({
   title,
   description,
   value,
+  changePercentage,
+  changeType,
   className,
 }) => {
   return (
     <Card className={cn("p-6", className)}>
       <CardHeader title={title} subtitle={description} />
       <CardBody>
-        <p className="text-3xl font-bold text-blue-600">{value}</p>
+        <div className="flex items-center justify-between">
+          <p className="text-3xl font-bold text-blue-600">{value}</p>
+          <div className={cn(
+            "flex items-center justify-center px-3 py-1 mx-2 rounded-full text-sm font-medium",
+            changeType === 'increase' ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'
+          )}>
+            {changeType === 'increase' ? (
+              <TrendingUp 
+                className='mx-1'
+              />
+            ) : (
+              <TrendingDown 
+                className='mx-1'
+              />
+            )}
+            {changePercentage}%
+          </div>
+        </div>
       </CardBody>
     </Card>
   );
