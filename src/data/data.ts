@@ -55,20 +55,20 @@ export const lineChartData = [
 
 //Data for revenue pie chart
 export const revenueData = [
-  { source: "Subscriptions", percentage: 63, fill: "#4CAF50" }, 
-  { source: "Ads", percentage: 26, fill: "#2196F3" },           
-  { source: "Partnerships", percentage: 5, fill: "#FFC107" },  
-  { source: "Content Monetization", percentage: 3, fill: "#FF5722" }, 
-  { source: "Merch and Events", percentage: 3, fill: "#9C27B0" },     
+  { source: "Subscriptions", percentage: 63, fill: "hsl(var(--chart-1))" }, 
+  { source: "Ads", percentage: 26, fill: "hsl(var(--chart-2))" },           
+  { source: "Partnerships", percentage: 5, fill: "hsl(var(--chart-3))" },  
+  { source: "Content Monetization", percentage: 3, fill: "hsl(var(--chart-4))" }, 
+  { source: "Merch and Events", percentage: 3, fill: "hsl(var(--chart-5))" },     
 ];
 
 //Data for top songs chart
 export const topSongsData = [
-  { song: "Blinding Lights", streams: 2500000000, fill: "#FF4500" }, 
-  { song: "Shape of You", streams: 3200000000, fill: "#FF6347" }, 
-  { song: "Someone You Loved", streams: 2100000000, fill: "#FFA500" }, 
-  { song: "Levitating", streams: 1800000000, fill: "#32CD32" }, 
-  { song: "Bad Guy", streams: 2400000000, fill: "#4682B4" }
+  { song: "Blinding Lights", streams: 2500000000, fill: "hsl(var(--chart-1))" }, 
+  { song: "Shape of You", streams: 3200000000, fill: "hsl(var(--chart-2))" }, 
+  { song: "Someone You Loved", streams: 2100000000, fill: "hsl(var(--chart-3))" }, 
+  { song: "Levitating", streams: 1800000000, fill: "hsl(var(--chart-4))" }, 
+  { song: "Bad Guy", streams: 2400000000, fill: "hsl(var(--chart-5))" }
 ];
 
 //Data for user activity data table
