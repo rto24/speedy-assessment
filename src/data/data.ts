@@ -193,4 +193,12 @@ export const recentStreams = [
     streamCount: 852104220,
     streamDate: new Date("2025-01-12T21:00:00-05:00"),
   },
+  {
+    userId: "user02",
+    userProfileImg: "/pfp-2.png",
+    songName: "Save Your Tears",
+    artist: "The Weeknd",
+    streamCount: 852104223,
+    streamDate: new Date("2025-01-12T21:00:00-05:00"),
+  },
 ];
