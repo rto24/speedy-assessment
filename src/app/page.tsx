@@ -1,18 +1,19 @@
 "use client"
 
-import { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Podcast } from "lucide-react";
 import DataCards from "@/components/DataCards";
-import TotalActiveUsersChart from "@/components/charts/TotalActiveUsers";
-import RevenueDistribution from "@/components/charts/Revenue";
-import TopSongs from "@/components/charts/TopSongs";
 import DataTable from "@/components/DataTable";
 import GoalsCard from "@/components/Goals";
 
+const TotalActiveUsersChart = lazy(() => import("@/components/charts/TotalActiveUsers"));
+const RevenueDistribution = lazy(() => import("@/components/charts/Revenue"));
+const TopSongs = lazy(() => import("@/components/charts/TopSongs"));
+
 const tabs = [
-  { name: "Total Users", component: <TotalActiveUsersChart /> },
-  { name: "Revenue", component: <RevenueDistribution /> },
-  { name: "Top Songs", component: <TopSongs /> },
+  { name: "Total Users", component: TotalActiveUsersChart },
+  { name: "Revenue", component: RevenueDistribution },
+  { name: "Top Songs", component: TopSongs },
 ];
 
 export default function Home() {
@@ -51,8 +52,11 @@ export default function Home() {
         </div>
 
         <div className="flex flex-wrap gap-4">
+          {/* Lazy Loading Optimization */}
           <div className="flex-1 h-[400px] bg-white rounded-lg p-2">
-            {tabs[activeTab].component}
+            <Suspense fallback={<div>Loading chart...</div>}>
+              {React.createElement(tabs[activeTab].component)}
+            </Suspense>
           </div>
           <GoalsCard />
         </div>
