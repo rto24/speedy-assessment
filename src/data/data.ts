@@ -19,7 +19,7 @@ export const dataCardMatrics = {
     description: "The total number of streams on the platform",
     changePercentage: 23.4,
     changeType: 'increase',
-    value: "563,780,204",
+    value: "10,563,780,204",
   },
   totalRevenue: {
     title: "Total Revenue",
@@ -207,5 +207,6 @@ export const recentStreams = [
 export const goals = [
   { label: "Revenue", value: 20083826, max: 25000000 },
   { label: "Total Users", value: 2123903, max: 2500000 },
-  { label: "Active Users", value: 1809202, max: 2000000 }
+  { label: "Active Users", value: 1809202, max: 2000000 },
+  { label: "Streams", value: 10563780204, max: 12000000000}
 ];

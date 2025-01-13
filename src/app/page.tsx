@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import { Podcast } from "lucide-react";
 import DataCards from "@/components/DataCards";
 import TotalActiveUsersChart from "@/components/charts/TotalActiveUsers";
 import RevenueDistribution from "@/components/charts/Revenue";
@@ -21,7 +22,10 @@ export default function Home() {
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Left Panel */}
       <div className="flex-none lg:w-1/4 bg-orange-500 text-white p-6 overflow-y-auto">
-        <h1 className="text-2xl font-bold mb-6">Overview</h1>
+        <div className="flex items-center">
+          <Podcast className="w-12 h-12"/>
+          <h1 className="text-2xl font-bold ml-2">Streamify</h1>
+        </div>
         <DataCards />
       </div>
 

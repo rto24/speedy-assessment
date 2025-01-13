@@ -10,14 +10,14 @@ const GoalsCard: React.FC = () => {
         </h3>
       </div>
       {goals.map((goal, index) => (
-        <div key={index} className="mb-6">
+        <div key={index} className="mb-6 p-4">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-700">{goal.label}</span>
-            <span className="text-sm text-gray-700">{goal.value.toLocaleString()}</span>
+            <span className="text-lg font-bold text-gray-700">{goal.label}</span>
+            <span className="text-lg text-gray-700">{goal.value.toLocaleString()}</span>
           </div>
           <div className="relative w-full h-2 rounded-full bg-gray-200">
             <div
-              className={`absolute top-0 left-0 h-full rounded-full bg-orange-400`}
+              className="absolute top-0 left-0 h-full rounded-full bg-orange-400"
               style={{ width: `${(goal.value / goal.max) * 100}%` }}
             >
             </div>
