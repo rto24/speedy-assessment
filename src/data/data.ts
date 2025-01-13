@@ -19,7 +19,7 @@ export const dataCardMatrics = {
     description: "The total number of streams on the platform",
     changePercentage: 23.4,
     changeType: 'increase',
-    value: "563,780,204",
+    value: "10,563,780,204",
   },
   totalRevenue: {
     title: "Total Revenue",
@@ -43,32 +43,32 @@ export const lineChartData = [
   { month: "February", users: 1149675, activeUsers: 609876 },
   { month: "March", users: 1256789, activeUsers: 689543 },
   { month: "April", users: 1389045, activeUsers: 725678 },
-  { month: "May", users: 1456783, activeUsers: 789012 },
+  { month: "May", users: 1256783, activeUsers: 689012 },
   { month: "June", users: 1523456, activeUsers: 834567 },
   { month: "July", users: 1601234, activeUsers: 890123 },
   { month: "August", users: 1678901, activeUsers: 934567 },
   { month: "September", users: 1756782, activeUsers: 978901 },
-  { month: "October", users: 1834567, activeUsers: 1023456 },
+  { month: "October", users: 1624567, activeUsers: 823456 },
   { month: "November", users: 1912345, activeUsers: 1078901 },
   { month: "December", users: 2003456, activeUsers: 1123456 },
 ];
 
 //Data for revenue pie chart
 export const revenueData = [
-  { source: "Subscriptions", percentage: 63, fill: "#4CAF50" }, 
-  { source: "Ads", percentage: 26, fill: "#2196F3" },           
-  { source: "Partnerships", percentage: 5, fill: "#FFC107" },  
-  { source: "Content Monetization", percentage: 3, fill: "#FF5722" }, 
-  { source: "Merch and Events", percentage: 3, fill: "#9C27B0" },     
+  { source: "Subscriptions", percentage: 63, fill: "hsl(var(--chart-1))" }, 
+  { source: "Ads", percentage: 26, fill: "hsl(var(--chart-2))" },           
+  { source: "Partnerships", percentage: 5, fill: "hsl(var(--chart-3))" },  
+  { source: "Content Monetization", percentage: 3, fill: "hsl(var(--chart-4))" }, 
+  { source: "Merch and Events", percentage: 3, fill: "hsl(var(--chart-5))" },     
 ];
 
 //Data for top songs chart
 export const topSongsData = [
-  { song: "Blinding Lights", streams: 2500000000, fill: "#FF4500" }, 
-  { song: "Shape of You", streams: 3200000000, fill: "#FF6347" }, 
-  { song: "Someone You Loved", streams: 2100000000, fill: "#FFA500" }, 
-  { song: "Levitating", streams: 1800000000, fill: "#32CD32" }, 
-  { song: "Bad Guy", streams: 2400000000, fill: "#4682B4" }
+  { song: "Blinding Lights", streams: 2500000000, fill: "hsl(var(--chart-1))" }, 
+  { song: "Shape of You", streams: 3200000000, fill: "hsl(var(--chart-2))" }, 
+  { song: "Someone You Loved", streams: 2100000000, fill: "hsl(var(--chart-3))" }, 
+  { song: "Levitating", streams: 1800000000, fill: "hsl(var(--chart-4))" }, 
+  { song: "Bad Guy", streams: 2400000000, fill: "hsl(var(--chart-5))" }
 ];
 
 //Data for user activity data table
@@ -201,4 +201,12 @@ export const recentStreams = [
     streamCount: 852104223,
     streamDate: new Date("2025-01-12T21:00:00-05:00"),
   },
+];
+
+//Data for yearly goals
+export const goals = [
+  { label: "Revenue", value: 20083826, max: 25000000 },
+  { label: "Total Users", value: 2123903, max: 2500000 },
+  { label: "Active Users", value: 1809202, max: 2000000 },
+  { label: "Streams", value: 10563780204, max: 12000000000}
 ];

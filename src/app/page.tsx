@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from "react";
+import { Podcast } from "lucide-react";
 import DataCards from "@/components/DataCards";
 import TotalActiveUsersChart from "@/components/charts/TotalActiveUsers";
 import RevenueDistribution from "@/components/charts/Revenue";
 import TopSongs from "@/components/charts/TopSongs";
 import DataTable from "@/components/DataTable";
+import GoalsCard from "@/components/Goals";
 
 const tabs = [
   { name: "Total Users", component: <TotalActiveUsersChart /> },
@@ -17,15 +19,18 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col lg:flex-row h-screen">
       {/* Left Panel */}
-      <div className="w-1/4 bg-gray-900 text-white p-6">
-        <h1 className="text-2xl font-bold mb-6">Overview</h1>
+      <div className="flex-none lg:w-1/4 bg-orange-500 text-white p-6 overflow-y-auto">
+        <div className="flex items-center">
+          <Podcast className="w-12 h-12"/>
+          <h1 className="text-2xl font-bold ml-2">Streamify</h1>
+        </div>
         <DataCards />
       </div>
 
       {/* Main Panel */}
-      <div className="w-3/4 bg-gray-100 p-6 overflow-y-auto">
+      <div className="flex-1 bg-gray-100 p-6">
         {/* Tabs */}
         <div className="mb-4">
           <div className="flex border-b">
@@ -35,7 +40,7 @@ export default function Home() {
                 onClick={() => setActiveTab(index)}
                 className={`px-4 py-2 font-bold ${
                   activeTab === index
-                    ? "text-blue-500 border-b-2 border-blue-500"
+                    ? "text-orange-500 border-b-2 border-orange-500"
                     : "text-gray-600"
                 }`}
               >
@@ -45,9 +50,11 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Active Chart */}
-        <div className="bg-white shadow rounded-lg p-4">
-          {tabs[activeTab].component}
+        <div className="flex flex-wrap gap-4">
+          <div className="flex-1 bg-white rounded-lg p-4">
+            {tabs[activeTab].component}
+          </div>
+          <GoalsCard />
         </div>
 
         {/* Data Table */}

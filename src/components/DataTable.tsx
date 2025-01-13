@@ -147,6 +147,7 @@ const DataTable: React.FC = () => {
   
   return (
     <div>
+      <h1 className="text-2xl font-bold m-2">Recent Activity</h1>
       {/* Table Contents */}
       <Table>
         <TableHeader>
@@ -167,7 +168,7 @@ const DataTable: React.FC = () => {
                     <Search className="absolute top-1/2 left-2 transform -translate-y-4 text-gray-500 z-10" />
                     <input
                       type="text"
-                      placeholder="Filter artist"
+                      placeholder="Filter user"
                       value={dropdownSearch}
                       onChange={(e) => handleSearch(e.target.value)}
                       className="w-full p-2 mb-3 pl-10 border rounded-md by-gray-100 text-black"
@@ -210,7 +211,7 @@ const DataTable: React.FC = () => {
                     <Search className="absolute top-1/2 left-2 transform -translate-y-4 text-gray-500 z-10" />
                     <input
                       type="text"
-                      placeholder="Filter artist"
+                      placeholder="Filter song"
                       value={dropdownSearch}
                       onChange={(e) => handleSearch(e.target.value)}
                       className="w-full p-2 mb-3 pl-10 border rounded-md by-gray-100 text-black"
