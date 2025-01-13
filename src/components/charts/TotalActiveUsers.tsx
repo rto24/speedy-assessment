@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CartesianGrid, Line, LineChart as RechartsLineChart, XAxis } from "recharts";
+import { CartesianGrid, AreaChart, XAxis, Area } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { lineChartData } from "@/data/data";
 
@@ -9,6 +9,10 @@ const chartConfig = {
   users: {
     label: "Users",
     color: "hsl(var(--chart-1))",
+  },
+  activeUsers: {
+    label: "Active Users",
+    color: "hsl(var(--chart-2))",
   },
 };
 
@@ -21,7 +25,7 @@ const TotalActiveUsersChart: React.FC = () => {
         config={chartConfig}
         className="w-full"
       >
-      <RechartsLineChart
+        <AreaChart
           data={lineChartData}
           margin={{
             left: 12,
@@ -40,27 +44,23 @@ const TotalActiveUsersChart: React.FC = () => {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-          <Line
+          <Area
             dataKey="users"
             type="linear"
+            fill="hsl(var(--chart-1))"
+            fillOpacity={0.4}
             stroke="hsl(var(--chart-1))"
-            strokeWidth={2}
-            dot={false}
             name="Total Users"
           />
-          <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-          <Line
+          <Area
             dataKey="activeUsers"
             type="linear"
+            fill="hsl(var(--chart-2))"
+            fillOpacity={0.4}
             stroke="hsl(var(--chart-2))"
-            strokeWidth={2}
-            dot={false}
             name="Active Users"
           />
-        </RechartsLineChart>
+        </AreaChart>
       </ChartContainer>
     </div>
   );
