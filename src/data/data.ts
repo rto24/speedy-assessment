@@ -202,3 +202,10 @@ export const recentStreams = [
     streamDate: new Date("2025-01-12T21:00:00-05:00"),
   },
 ];
+
+//Data for yearly goals
+export const goals = [
+  { label: "Revenue", value: 20083826, max: 25000000 },
+  { label: "Total Users", value: 2123903, max: 2500000 },
+  { label: "Active Users", value: 1809202, max: 2000000 }
+];
