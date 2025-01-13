@@ -19,7 +19,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
+    <div className="flex flex-col lg:flex-row max-h-screen overflow-hidden">
       {/* Left Panel */}
       <div className="flex-none lg:w-1/4 bg-orange-500 text-white p-6 overflow-y-auto">
         <div className="flex items-center">
@@ -30,10 +30,10 @@ export default function Home() {
       </div>
 
       {/* Main Panel */}
-      <div className="flex-1 bg-gray-100 p-6">
+      <div className="flex-1 bg-gray-100 lg:p-6">
         {/* Tabs */}
         <div className="mb-4">
-          <div className="flex border-b">
+          <div className="flex flex-wrap border-b">
             {tabs.map((tab, index) => (
               <button
                 key={index}
