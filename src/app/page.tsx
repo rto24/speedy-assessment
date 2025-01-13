@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="flex h-screen">
       {/* Left Panel */}
-      <div className="w-1/4 bg-gray-900 text-white p-6">
+      <div className="w-1/4 bg-orange-500 text-white p-6">
         <h1 className="text-2xl font-bold mb-6">Overview</h1>
         <DataCards />
       </div>
@@ -35,7 +35,7 @@ export default function Home() {
                 onClick={() => setActiveTab(index)}
                 className={`px-4 py-2 font-bold ${
                   activeTab === index
-                    ? "text-blue-500 border-b-2 border-blue-500"
+                    ? "text-orange-500 border-b-2 border-orange-500"
                     : "text-gray-600"
                 }`}
               >

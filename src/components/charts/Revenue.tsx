@@ -37,7 +37,7 @@ const chartConfig = {
 const RevenueDistribution: React.FC = () => {
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-6">
-      <h1 className="text-xl my-2 font-bold">Revenue Distribution</h1>
+      <h1 className="text-xl my-2 font-bold">Revenue Distribution (%)</h1>
       <p>January - December 2024</p>
       <ChartContainer
         config={chartConfig}

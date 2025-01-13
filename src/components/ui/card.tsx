@@ -67,7 +67,7 @@ const DataCard: React.FC<DataCardProps> = ({
       <CardHeader title={title} subtitle={description} />
       <CardBody>
         <div className="flex items-center justify-between">
-          <p className="text-3xl font-bold text-blue-600">{value}</p>
+          <p className="text-3xl font-bold text-orange-500">{value}</p>
           <div className={cn(
             "flex items-center justify-center px-3 py-1 mx-2 rounded-full text-sm font-medium",
             changeType === 'increase' ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'
