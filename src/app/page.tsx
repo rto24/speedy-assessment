@@ -19,7 +19,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="flex flex-col lg:flex-row max-h-screen overflow-hidden">
+    <div className="flex flex-col lg:flex-row max-h-screen">
       {/* Left Panel */}
       <div className="flex-none lg:w-1/4 bg-orange-500 text-white p-6 overflow-y-auto">
         <div className="flex items-center">
