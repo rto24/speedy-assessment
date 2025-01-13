@@ -19,7 +19,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="flex flex-col lg:flex-row max-h-screen">
+    <div className="flex flex-col lg:flex-row h-screen">
       {/* Left Panel */}
       <div className="flex-none lg:w-1/4 bg-orange-500 text-white p-6 overflow-y-auto">
         <div className="flex items-center">
@@ -51,7 +51,7 @@ export default function Home() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <div className="flex-1 bg-white rounded-lg p-4">
+          <div className="flex-1 h-[400px] bg-white rounded-lg p-2">
             {tabs[activeTab].component}
           </div>
           <GoalsCard />

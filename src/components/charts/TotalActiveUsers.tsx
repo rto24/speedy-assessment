@@ -23,7 +23,7 @@ const TotalActiveUsersChart: React.FC = () => {
       <p>January - December 2024</p>
       <ChartContainer 
         config={chartConfig}
-        className="w-full"
+        className="w-full h-[300px]"
       >
         <AreaChart
           data={lineChartData}

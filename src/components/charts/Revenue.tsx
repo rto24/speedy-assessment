@@ -41,7 +41,7 @@ const RevenueDistribution: React.FC = () => {
       <p>January - December 2024</p>
       <ChartContainer
         config={chartConfig}
-        className="mx-auto h-full w-full"
+        className="mx-auto h-[300px] w-full"
       >
         <PieChart>
           <ChartTooltip
