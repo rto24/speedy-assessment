@@ -94,15 +94,15 @@ A table with information about recent streams:
 ## **How to Run the Application**
 
 ### **Local Setup**
-1. Clone the repository:
-   git clone https://github.com/your-repo/streamify-dashboard.git
-   cd streamify-dashboard
+1. Fork and clone the repository
 
 2. Install dependencies:
+    ```bash
     npm install
 
 3. Start development server:
+    ```bash
     npm run dev
 
 4. Open on localhost in the browser:
-    http://localhost:3000
+    `http://localhost:3000`
