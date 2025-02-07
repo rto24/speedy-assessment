@@ -43,7 +43,7 @@ const TopSongs: React.FC = () => {
       <p>Past 30 days</p>
       <ChartContainer 
         config={chartConfig}
-        className="w-full h-[250px]"
+        className="w-full h-[300px]"
       >
         <BarChart
           accessibilityLayer

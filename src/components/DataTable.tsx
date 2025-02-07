@@ -24,7 +24,8 @@ import {
   Minus, 
   ClockArrowDown,
   ClockArrowUp, 
-  Search 
+  Search,
+  Filter 
 } from "lucide-react";
 
 const DataTable: React.FC = () => {
@@ -32,6 +33,9 @@ const DataTable: React.FC = () => {
   const [ dropdownSearch, setDropdownSearch ] = useState<string>("");
   const [ streamCountSort, setStreamCountSort ] = useState<"default" | "ascending" | "descending">("default");
   const [ streamDateSort, setStreamDateSort ] = useState<"default" | "ascending" | "descending">("default");
+
+  const [songNameModal, setSongNameModal] = useState<boolean>(false);
+  const [songFilterSelect, setSongFilterSelect] = useState<"contains" | "starts" | "ends">("contains");
 
   //Pagination page state
   const [ currPage, setCurrPage ] = useState<number>(1);
@@ -104,6 +108,13 @@ const DataTable: React.FC = () => {
       setStreamCountSort("default");
     }
   };
+
+  const handleSongNameFilter = (value: string) => {
+    if (value === "contains") {
+      
+    }
+  }
+
       
   const paginatedData = useMemo(() => {
     const startIndex = (currPage - 1) * itemsPerPage;
@@ -120,6 +131,13 @@ const DataTable: React.FC = () => {
 
   const handleSearch = (value: string) => {
     setDropdownSearch(value);
+  };
+
+  const handleSearchInput = (value: string) => {
+    setSearchParams((prev) => ({
+      ...prev,
+      term: value
+    }))
   };
 
   //Sets search params filters upon selection
@@ -147,6 +165,7 @@ const DataTable: React.FC = () => {
   
   return (
     <div>
+      <input type="text" onChange={(e) => handleSearchInput(e.target.value)}/>
       <h1 className="text-2xl font-bold m-2">Recent Activity</h1>
       {/* Table Contents */}
       <Table>
@@ -204,6 +223,22 @@ const DataTable: React.FC = () => {
                     <ChevronDown className="ml-1 w-4 h-4"/>
                   </div>
                 </DropdownMenuTrigger>
+                
+                <Filter className="ml-1 w-4 h-4" onClick={() => setSongNameModal(true)}/>
+                {songNameModal && 
+                    <div>
+                      <label>
+                        <select>
+                          <option value="contains">Contains</option>
+                          <option value="start">Starts with</option>
+                          <option value="end">Ends with</option>
+                        </select>
+                      </label>
+                      {/* <input type="text" onChange={}/> */}
+                      <button onClick={() => setSongNameModal(false)}>X</button>
+                    </div>
+                }
+               
                 <DropdownMenuContent
                   className="flex flex-wrap max-w-md gap-2 p-4"
                 >
