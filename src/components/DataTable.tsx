@@ -25,7 +25,7 @@ import {
   ClockArrowDown,
   ClockArrowUp, 
   Search,
-  Filter 
+  ListFilter
 } from "lucide-react";
 
 const DataTable: React.FC = () => {
@@ -34,8 +34,10 @@ const DataTable: React.FC = () => {
   const [ streamCountSort, setStreamCountSort ] = useState<"default" | "ascending" | "descending">("default");
   const [ streamDateSort, setStreamDateSort ] = useState<"default" | "ascending" | "descending">("default");
 
+  //State for further filters on song name dropdown
   const [songNameModal, setSongNameModal] = useState<boolean>(false);
-  const [songFilterSelect, setSongFilterSelect] = useState<"contains" | "starts" | "ends">("contains");
+  const [songFilterSelect, setSongFilterSelect] = useState<"contains" | "startsWith" | "endsWith">("contains");
+  const [songFilterValue, setSongFilterValue] = useState<string>("");
 
   //Pagination page state
   const [ currPage, setCurrPage ] = useState<number>(1);
@@ -55,16 +57,45 @@ const DataTable: React.FC = () => {
   }, []);
   
   const filteredData = useMemo(() => {
-    return recentStreams.filter((stream) =>
-      (!searchParams.term ||
+    return recentStreams.filter((stream) => {
+      const matchTerm = 
+        !searchParams.term || 
         stream.artist.toLowerCase().includes(searchParams.term.toLowerCase()) ||
         stream.songName.toLowerCase().includes(searchParams.term.toLowerCase()) ||
-        stream.userId.toLowerCase().includes(searchParams.term.toLowerCase())) &&
-      (!searchParams.filters.artist || searchParams.filters.artist?.length === 0 || searchParams.filters.artist?.includes(stream.artist)) &&
-      (!searchParams.filters.songName || searchParams.filters.songName?.length === 0 || searchParams.filters.songName?.includes(stream.songName)) &&
-      (!searchParams.filters.userId || searchParams.filters.userId?.length === 0 || searchParams.filters.userId?.includes(stream.userId))
-    );
-  }, [searchParams]);
+        stream.userId.toLowerCase().includes(searchParams.term.toLowerCase())
+      
+        const matchArtist = 
+          !searchParams.filters.artist ||
+          searchParams.filters.artist.length === 0 ||
+          searchParams.filters.artist.includes(stream.artist)
+        
+        const matchSong =
+          !searchParams.filters.songName ||
+          searchParams.filters.songName.length === 0 ||
+          searchParams.filters.songName.includes(stream.songName)
+        
+        const matchUser =
+          !searchParams.filters.userId ||
+          searchParams.filters.userId.length === 0 ||
+          searchParams.filters.userId.includes(stream.userId)
+
+        //Conditional filtering based on song name filter selection
+        let songNameFilterMatches = true;
+        if (songFilterValue) {
+          const songLower = stream.songName.toLowerCase();
+          const filterLower = songFilterValue.toLowerCase();
+
+          if (songFilterSelect === "contains") {
+            songNameFilterMatches = songLower.includes(filterLower);
+          } else if (songFilterSelect === "startsWith") {
+            songNameFilterMatches = songLower.startsWith(filterLower);
+          } else if (songFilterSelect === "endsWith") {
+            songNameFilterMatches = songLower.endsWith(filterLower);
+          }
+        }
+        return matchTerm && matchArtist && matchSong && matchUser && songNameFilterMatches;
+      })
+  }, [searchParams, songFilterSelect, songFilterValue]);
   
   //Sorting functionality for stream count and date
   const sortedData = useMemo(() => {
@@ -108,14 +139,7 @@ const DataTable: React.FC = () => {
       setStreamCountSort("default");
     }
   };
-
-  const handleSongNameFilter = (value: string) => {
-    if (value === "contains") {
-      
-    }
-  }
-
-      
+  
   const paginatedData = useMemo(() => {
     const startIndex = (currPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -129,7 +153,7 @@ const DataTable: React.FC = () => {
     }
   };
 
-  const handleSearch = (value: string) => {
+  const handleDropdownSearch = (value: string) => {
     setDropdownSearch(value);
   };
 
@@ -189,7 +213,7 @@ const DataTable: React.FC = () => {
                       type="text"
                       placeholder="Filter user"
                       value={dropdownSearch}
-                      onChange={(e) => handleSearch(e.target.value)}
+                      onChange={(e) => handleDropdownSearch(e.target.value)}
                       className="w-full p-2 mb-3 pl-10 border rounded-md by-gray-100 text-black"
                     />
                   </div>
@@ -217,28 +241,19 @@ const DataTable: React.FC = () => {
             <TableHead>
               {/* Song Filter */}
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <div className="flex items-center">
-                    Song Name
-                    <ChevronDown className="ml-1 w-4 h-4"/>
-                  </div>
-                </DropdownMenuTrigger>
-                
-                <Filter className="ml-1 w-4 h-4" onClick={() => setSongNameModal(true)}/>
-                {songNameModal && 
-                    <div>
-                      <label>
-                        <select>
-                          <option value="contains">Contains</option>
-                          <option value="start">Starts with</option>
-                          <option value="end">Ends with</option>
-                        </select>
-                      </label>
-                      {/* <input type="text" onChange={}/> */}
-                      <button onClick={() => setSongNameModal(false)}>X</button>
+                <div className="flex gap-5">
+                  <DropdownMenuTrigger>
+                    <div className="flex items-center">
+                      Song Name
+                      <ChevronDown className="ml-1 w-4 h-4"/>
                     </div>
-                }
-               
+                  </DropdownMenuTrigger>
+                  {/* Trigger for finer filters */}
+                  <ListFilter 
+                    className="w-4 h-4" 
+                    onClick={() => setSongNameModal(true)} 
+                  />
+                </div>
                 <DropdownMenuContent
                   className="flex flex-wrap max-w-md gap-2 p-4"
                 >
@@ -248,7 +263,7 @@ const DataTable: React.FC = () => {
                       type="text"
                       placeholder="Filter song"
                       value={dropdownSearch}
-                      onChange={(e) => handleSearch(e.target.value)}
+                      onChange={(e) => handleDropdownSearch(e.target.value)}
                       className="w-full p-2 mb-3 pl-10 border rounded-md by-gray-100 text-black"
                     />
                   </div>
@@ -271,6 +286,26 @@ const DataTable: React.FC = () => {
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>
+              
+              {/* Modal for further song filtering*/}
+              {songNameModal && 
+                <div className="absolute bg-white p-4">
+                  <select
+                    value={songFilterSelect}
+                    onChange={(e) => setSongFilterSelect(e.target.value as "contains" | "startsWith" | "endsWith")}
+                  >
+                    <option value="contains">Contains</option>
+                    <option value="startsWith">Starts with</option>
+                    <option value="endsWith">Ends with</option>
+                  </select>
+                  <input 
+                    type="text" 
+                    onChange={(e) => setSongFilterValue(e.target.value)}
+                    className="ml-2 mr-2"
+                  />
+                  <button onClick={() => setSongNameModal(false)}>X</button>
+                </div>
+              }
             </TableHead>
 
             <TableHead>
@@ -291,7 +326,7 @@ const DataTable: React.FC = () => {
                       type="text"
                       placeholder="Filter artist"
                       value={dropdownSearch}
-                      onChange={(e) => handleSearch(e.target.value)}
+                      onChange={(e) => handleDropdownSearch(e.target.value)}
                       className="w-full p-2 mb-3 pl-10 border rounded-md by-gray-100 text-black"
                     />
                   </div>
