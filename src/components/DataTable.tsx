@@ -39,6 +39,11 @@ const DataTable: React.FC = () => {
   const [songFilterSelect, setSongFilterSelect] = useState<"contains" | "startsWith" | "endsWith">("contains");
   const [songFilterValue, setSongFilterValue] = useState<string>("");
 
+  //State for further filters on artist dropdown
+  const [artistModal, setArtistModal] = useState<boolean>(false);
+  const [artistFilterSelect, setArtistSelect] = useState<"contains" | "startsWith" | "endsWith">("contains");
+  const [artistFilterValue, setArtistFilterValue] = useState<string>("");
+
   //Pagination page state
   const [ currPage, setCurrPage ] = useState<number>(1);
   const itemsPerPage = 4;
@@ -93,9 +98,25 @@ const DataTable: React.FC = () => {
             songNameFilterMatches = songLower.endsWith(filterLower);
           }
         }
-        return matchTerm && matchArtist && matchSong && matchUser && songNameFilterMatches;
+
+        //Conditional filtering based on artist name selection
+        let artistNameFilterMatches = true;
+        if (artistNameFilterMatches) {
+          const artistLower = stream.artist.toLowerCase();
+          const filterLower = artistFilterValue.toLowerCase();
+
+          if (artistFilterSelect === "contains") {
+            artistNameFilterMatches = artistLower.includes(filterLower);
+          } else if (artistFilterSelect === "startsWith") {
+            artistNameFilterMatches = artistLower.startsWith(filterLower);
+          } else if (artistFilterSelect === "endsWith") {
+            artistNameFilterMatches = artistLower.endsWith(filterLower);
+          }
+        }
+
+        return matchTerm && matchArtist && matchSong && matchUser && songNameFilterMatches && artistNameFilterMatches;
       })
-  }, [searchParams, songFilterSelect, songFilterValue]);
+  }, [searchParams, songFilterSelect, songFilterValue, artistFilterSelect, artistFilterValue]);
   
   //Sorting functionality for stream count and date
   const sortedData = useMemo(() => {
@@ -286,7 +307,7 @@ const DataTable: React.FC = () => {
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>
-              
+
               {/* Modal for further song filtering*/}
               {songNameModal && 
                 <div className="absolute bg-white p-4">
@@ -311,12 +332,18 @@ const DataTable: React.FC = () => {
             <TableHead>
               {/* Artist Filter */}
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <div className="flex items-center">
-                    Artists
-                    <ChevronDown className="ml-1 w-4 h-4"/>
-                  </div>
-                </DropdownMenuTrigger>
+                <div className="flex gap-5">
+                  <DropdownMenuTrigger>
+                    <div className="flex items-center">
+                      Artists
+                      <ChevronDown className="ml-1 w-4 h-4"/>
+                    </div>
+                  </DropdownMenuTrigger>
+                  <ListFilter
+                    className="w-4 h-4"
+                    onClick={() => setArtistModal(true)}
+                  />
+                </div>
                 <DropdownMenuContent
                   className="flex flex-wrap max-w-md gap-2 p-4"
                 >
@@ -349,6 +376,27 @@ const DataTable: React.FC = () => {
                   </div>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              {/* Modal for further artist filtering */}
+              {artistModal && 
+                <div className="absolute bg-white p-4">
+                  <select
+                    value={artistFilterSelect}
+                    onChange={(e) => setArtistSelect(e.target.value as "contains" | "startsWith" | "endsWith")}
+                  >
+                    <option value="contains">Contains</option>
+                    <option value="startsWith">Starts with</option>
+                    <option value="endsWith">Ends with</option>
+                  </select>
+                  <input 
+                    type="text" 
+                    onChange={(e) => setArtistFilterValue(e.target.value)}
+                    className="ml-2 mr-2"
+                  />
+                  <button onClick={() => setArtistModal(false)}>X</button>
+                </div>
+              }
+
             </TableHead>
             <TableHead
               onClick={() => handleSort("streamCount")}
