@@ -60,6 +60,22 @@ const DataTable: React.FC = () => {
   const users = useMemo(() => {
     return Array.from(new Set(recentStreams.map((stream) => stream.userId)));
   }, []);
+
+  // Helper function to reuse contains, starts with, and ends with filter selections
+  const furtherFilters = (value: string, filterValue: string, type: "contains" | "startsWith" | "endsWith") => {
+    if (!filterValue) return true;
+    const valueLower = value.toLowerCase();
+    const filterLower = filterValue.toLowerCase();
+
+    if (type === "contains") {
+      return valueLower.includes(filterLower)
+    } else if (type === "startsWith") {
+      return valueLower.startsWith(filterLower)
+    } else if (type === "endsWith") {
+      return valueLower.endsWith(filterLower);
+    };
+    return true;
+  };
   
   const filteredData = useMemo(() => {
     return recentStreams.filter((stream) => {
@@ -85,36 +101,12 @@ const DataTable: React.FC = () => {
           searchParams.filters.userId.includes(stream.userId)
 
         //Conditional filtering based on song name filter selection
-        let songNameFilterMatches = true;
-        if (songFilterValue) {
-          const songLower = stream.songName.toLowerCase();
-          const filterLower = songFilterValue.toLowerCase();
-
-          if (songFilterSelect === "contains") {
-            songNameFilterMatches = songLower.includes(filterLower);
-          } else if (songFilterSelect === "startsWith") {
-            songNameFilterMatches = songLower.startsWith(filterLower);
-          } else if (songFilterSelect === "endsWith") {
-            songNameFilterMatches = songLower.endsWith(filterLower);
-          }
-        }
-
+        const songFilters = furtherFilters(stream.songName, songFilterValue, songFilterSelect);
+        
         //Conditional filtering based on artist name selection
-        let artistNameFilterMatches = true;
-        if (artistNameFilterMatches) {
-          const artistLower = stream.artist.toLowerCase();
-          const filterLower = artistFilterValue.toLowerCase();
-
-          if (artistFilterSelect === "contains") {
-            artistNameFilterMatches = artistLower.includes(filterLower);
-          } else if (artistFilterSelect === "startsWith") {
-            artistNameFilterMatches = artistLower.startsWith(filterLower);
-          } else if (artistFilterSelect === "endsWith") {
-            artistNameFilterMatches = artistLower.endsWith(filterLower);
-          }
-        }
-
-        return matchTerm && matchArtist && matchSong && matchUser && songNameFilterMatches && artistNameFilterMatches;
+        const artistFilters = furtherFilters(stream.artist, artistFilterValue, artistFilterSelect);
+        
+        return matchTerm && matchArtist && matchSong && matchUser && songFilters && artistFilters;
       })
   }, [searchParams, songFilterSelect, songFilterValue, artistFilterSelect, artistFilterValue]);
   
