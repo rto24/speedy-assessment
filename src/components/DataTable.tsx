@@ -202,7 +202,12 @@ const DataTable: React.FC = () => {
   
   return (
     <div>
-      <input type="text" onChange={(e) => handleSearchInput(e.target.value)}/>
+      <input 
+        type="text" 
+        onChange={(e) => handleSearchInput(e.target.value)}
+        className="mt-2 mb-2 pl-2 pr-2 border border-gray-500 rounded-sm"
+        placeholder="Global search..."  
+      />
       <h1 className="text-2xl font-bold m-2">Recent Activity</h1>
       {/* Table Contents */}
       <Table>
@@ -314,7 +319,7 @@ const DataTable: React.FC = () => {
                   <input 
                     type="text" 
                     onChange={(e) => setSongFilterValue(e.target.value)}
-                    className="ml-2 mr-2"
+                    className="ml-2 mr-2 border border-gray-500 rounded-sm"
                   />
                   <button onClick={() => setSongNameModal(false)}>X</button>
                 </div>
@@ -383,7 +388,7 @@ const DataTable: React.FC = () => {
                   <input 
                     type="text" 
                     onChange={(e) => setArtistFilterValue(e.target.value)}
-                    className="ml-2 mr-2"
+                    className="ml-2 mr-2 border border-gray-500 rounded-sm"
                   />
                   <button onClick={() => setArtistModal(false)}>X</button>
                 </div>
